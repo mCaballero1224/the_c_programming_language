@@ -2,7 +2,9 @@
 
 This program reads user input, reads each character and keeps track of the number of characters given. Counts for tabs, newlines, and spaces/blanks are also given. 
 
-![Demo of specialcount](https://github.com/mCaballero1224/the_c_programming_language/blob/main/assets/video/specialcounter_demo.gif)
+<p align="center">
+    <img src="https://github.com/mCaballero1224/the_c_programming_language/blob/main/assets/video/specialcounter_demo.gif" />
+</p>
 
 The program uses preprocessing directives to define the ASCII values for tabs, newlines, and spaces. I could've used comparisons to '\t', '\n', and ' ' respectively, but having the values defined to a number made it easier to think about in my noggin.
 
