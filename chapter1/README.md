@@ -28,6 +28,6 @@
 
 
 ## Programs
-- `hello-world`: prints a "hello, world" message to the terminal
-- `fahr2celsius`: prints a Fahrenheit-Celsius table using a lower limit, upper limit, and step value to increment between the two limits
-- `celsius2fahr`: prints a Celsius-Fahrenheit table using a similar method as `fahr2celsius`
+- [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal
+- [`fahr2celsius`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/fahr2celsius): prints a Fahrenheit-Celsius table using a lower limit, upper limit, and step value to increment between the two limits
+- [`celsius2fahr`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/celsius2fahr): prints a Celsius-Fahrenheit table using a similar method as `fahr2celsius`
