@@ -11,6 +11,9 @@
  * Add option flags to control output
 */
 
+/* NOTE: Exercise 1-5 - write a program to print the corresponding
+	Celsius to Fahrenheit table */
+
 int
 main()
 {
