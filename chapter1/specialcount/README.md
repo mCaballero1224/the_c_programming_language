@@ -5,7 +5,6 @@ This program reads user input, reads each character and keeps track of the numbe
 <p align="center">
     <img src="https://github.com/mCaballero1224/the_c_programming_language/blob/main/assets/video/specialcounter_demo.gif" />
 </p>
-<caption>Note to self, cut tail of GIF so that it doesn't show kdenlive</caption>
 
 At the time of writing (Jul 26 2024), the counts include characters deleted by backspace. Another program in chapter one of "The C Programming Langauge" has the reader taking input and replacing backspace with '\b' rather than having it delete a character. 
 
