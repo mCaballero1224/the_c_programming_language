@@ -2,9 +2,11 @@
 
 ## Exercises
 1-1. [x] Run the "hello, wolrd" program on your system. Experiment with leaving out parts of the program, to see what error messages you get.
+
     - leaving out the "int" section gives an error that describes "int" as the default return type
 
 1-2. [x] Experiment to find out what happens when printf's argument string contains \c, where c is some character not listed above.
+
     - "\t" represents a horizontal tab
     - "\n" represents a new line
     - "\b" represents a backspace
