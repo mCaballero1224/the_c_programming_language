@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <stdlib.h>
 #include <ncurses.h> /* used to allow for raw-mode input */
 
@@ -55,6 +54,9 @@ main()
 				break;
 			case '\t':			/* Tab character */
 				bold_print("\\t");
+				break;
+			case '\\':			/* Backslash character */
+				bold_print("\\\\");
 				break;
 			case KEY_BACKSPACE:		/* Backspace character */
 				bold_print("\\b");
