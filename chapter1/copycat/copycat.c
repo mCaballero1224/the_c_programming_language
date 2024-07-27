@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdlib.h>
 #include <ncurses.h> /* used to allow for raw-mode input */
 

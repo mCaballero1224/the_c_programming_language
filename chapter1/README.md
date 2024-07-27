@@ -39,10 +39,6 @@
 
 1-12. [ ] Write a program that prints one word per line.
 
-
-
-
-
 ## Programs
 - [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal.
 - [`fahr2celsius`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/fahr2celsius): prints a Fahrenheit-Celsius table using a lower limit, upper limit, and step value to increment between the two limits.
