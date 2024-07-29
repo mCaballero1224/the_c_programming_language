@@ -34,10 +34,16 @@
 1-11. [x] How would you test the `wordcount` program? What kinds of input are most likely to uncover bugs, if there are any?
 
 <ul>
-    <li>Backspaces mess up the word count, as they contribute to the character count, and may also mess up the word count depending on the characters removed from inut.</li>
-<ul>
+    <li>Backspaces mess up the word count, as they contribute to the character count, and may also mess up the word count depending on the characters removed from input.</li>
+    <li>I got around the above point by making use of a buffer to store user input on top of adding some input handling for backspaces.</li>
+    <li>The final result feels like a *really* basic text-editor.</li>
+</ul>
 
 1-12. [ ] Write a program that prints one word per line.
+
+1-13. [ ] Write a program to print a histogram of the lengths of words in its input. 
+
+1-14. [ ] Write a program to print a histogram of the frequences of different characters in its input. 
 
 ## Programs
 - [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal.
