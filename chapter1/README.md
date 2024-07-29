@@ -36,7 +36,7 @@
 <ul>
     <li>Backspaces mess up the word count, as they contribute to the character count, and may also mess up the word count depending on the characters removed from input.</li>
     <li>I got around the above point by making use of a buffer to store user input on top of adding some input handling for backspaces.</li>
-    <li>The final result feels like a *really* basic text-editor.</li>
+    <li>The final result feels like a <em>really</em> basic text-editor.</li>
 </ul>
 
 1-12. [ ] Write a program that prints one word per line.
@@ -46,9 +46,11 @@
 1-14. [ ] Write a program to print a histogram of the frequences of different characters in its input. 
 
 ## Programs
-- [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal.
 - [`fahr2celsius`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/fahr2celsius): prints a Fahrenheit-Celsius table using a lower limit, upper limit, and step value to increment between the two limits.
 - [`celsius2fahr`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/celsius2fahr): prints a Celsius-Fahrenheit table using a similar method as `fahr2celsius`.
 - [`copycat`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/copycat): copies keyboard input to stdout, replacing tabs, backspaces, and backslashes with characters.
-- [`wordcount`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordcount): copies keyboard input to stdout, counting words entered.
+- [`eofval`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/eofval): small program that evaluates keyboard input comparing it against the value for end-of-file (EOF).
+- [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal.
 - [`specialcount`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/specialcount): copies keyboard input to stdout, counting total characters read, newlines, tabs, and spaces/blanks.
+- [`wordcount`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordcount): copies keyboard input to stdout, counting words entered.
+- [`wordline`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordline): copies keyboard input to stdout, printing each word on a new line.
