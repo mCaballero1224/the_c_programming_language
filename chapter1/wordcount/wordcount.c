@@ -8,7 +8,7 @@
 #define CTRL(x) ((x) & 0x1f)
 #define TRUE 1
 #define FALSE 0
-#define BUFSIZE 1024
+#define BUFSIZE 64
 
 /* Prints outro message and cleans up the screen before exiting the program */
 int end_program();
@@ -102,7 +102,7 @@ main()
 		/* Update move to the next space in the buffer and update the character count
 			so long as we haven't hit the end of the buffer and the read character
 			is not a backspace or CTRL-H (CTRL-D is already handled in the switch statement). */
-		if ((index < (BUFSIZE-1)) && ((ch != KEY_BACKSPACE) && (ch != CTRL('h'))))
+		if ((index <= BUFSIZE) && ((ch != KEY_BACKSPACE) && (ch != CTRL('h'))))
 		{
 			++index;
 			++char_count;
@@ -156,7 +156,7 @@ print_status(char *buf, int wc, int index, int word_status, int hidden)
 	printw("\nHidden characters: %s", hidden ? "enabled" : "disabled");
 	printw("\nWord count: %d", wc);
 	printw("\nBuffer size: %d", BUFSIZE);
-	printw("\nRemaining space in buffer: %dB", (BUFSIZE-index-1));
+	printw("\nRemaining space in buffer: %dB", (BUFSIZE-index));
 
 	/* Handle invisible characters. */
 	switch(last_char)
