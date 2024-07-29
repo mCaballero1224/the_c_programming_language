@@ -8,7 +8,7 @@
 #define CTRL(x) ((x) & 0x1f)
 #define TRUE 1
 #define FALSE 0
-#define BUFSIZE 64
+#define BUFSIZE 128
 
 /* Prints outro message and cleans up the screen before exiting the program */
 int end_program();
@@ -26,12 +26,15 @@ int bold_print(char *buf);
 	and spaces with visible characters */
 int print_hidden(char buf[]);
 
+/* Determines whether a character is one of the control characters used in the
+	program */
+int is_cntrl(char c);
 
 /* Main Function */
 int
 main()
 {
-	char buf[BUFSIZE+1] = {0}; /* buffer to hold user input */
+	char buf[BUFSIZE] = {0}; /* buffer to hold user input */
 	int ch, char_count, in_word, wc, index, deleted, hidden; /* initial variables */
 
 	/* start ncurses screen */
@@ -56,6 +59,11 @@ main()
 				return end_program();
 			case CTRL('h'):			/* view hidden characters upon receiving CTRL-H */
 				hidden = !hidden;
+				break;
+			case CTRL('l'):
+				for (int i = 0; i < BUFSIZE; i++)
+					buf[i] = 0;
+				index = wc = 0;
 				break;
 			case KEY_BACKSPACE:		/* Handle backspace */
 				if (index > 0)		/* Prevent decrementing outside of the buffer */
@@ -85,7 +93,8 @@ main()
 				in_word = FALSE;
 				break;
 			default:	
-				if (!in_word)
+				if (!in_word && (index != BUFSIZE-1)) /* Also check that we're not already at 
+										the end of the buffer */
 				{
 					++wc;	/* If we're outside of a word and receive a normal character
 							update the word count and set the `in_word` state to TRUE */
@@ -94,16 +103,15 @@ main()
 				break;
 		}
 
-		/* Place the read character inside of the buffer so long as it isn't
-			a backspace, or one of the CTRL keys used in the program. 
-			Otherwise, set it to a null character. */
-		buf[index] = ((ch != KEY_BACKSPACE) && (ch != CTRL('d')) && ch != CTRL('h')) ? ch : 0;
-
 		/* Update move to the next space in the buffer and update the character count
 			so long as we haven't hit the end of the buffer and the read character
 			is not a backspace or CTRL-H (CTRL-D is already handled in the switch statement). */
-		if ((index <= BUFSIZE) && ((ch != KEY_BACKSPACE) && (ch != CTRL('h'))))
+		if ((index < BUFSIZE-1) && ((ch != KEY_BACKSPACE) && !is_cntrl(ch)))
 		{
+			/* Place the read character inside of the buffer so long as it isn't
+				a backspace, or one of the CTRL keys used in the program. 
+				Otherwise, set it to a null character. */
+			buf[index] = ((ch != KEY_BACKSPACE) && !is_cntrl(ch)) ? ch : 0;
 			++index;
 			++char_count;
 		}
@@ -130,7 +138,7 @@ main()
 int 
 end_program()
 {
-	printw("\n\nThank you for using wordcount.\nPress any key to exit.");
+	printw("\n\n Thank you for using wordcount.\nPress any key to exit.");
 	getch(); /* Wait for user input to close the window. */
 	endwin();
 	return 0;
@@ -142,45 +150,58 @@ int
 print_status(char *buf, int wc, int index, int word_status, int hidden)
 {
 	int last_char = buf[index-1];
-
+	start_color();
+	init_pair(1, COLOR_RED, COLOR_BLACK);
 	
 	/* Instructions on using the program. */
-	printw("Enter input with the keyboard.\n");
-	printw("Press Ctrl-D to exit the program.\n");
-	printw("Press Ctrl-H to show hidden characters.\n");
+	bold_print("\n === Welcome to Wordcount! ===");
+	printw("\n\n Enter input with the keyboard.");
+	printw("\n Press Ctrl-D to exit the program.");
+	printw("\n Press Ctrl-H to show hidden characters.");
+	printw("\n Press Ctrl-L to clear the buffer.");
 
 	/* Program Status */
-	bold_print("\n=== Status ==");
-	printw("\nCurrent index: %d", index);
-	printw("\nState: %s", word_status ? "IN word" : "OUT of word");
-	printw("\nHidden characters: %s", hidden ? "enabled" : "disabled");
-	printw("\nWord count: %d", wc);
-	printw("\nBuffer size: %d", BUFSIZE);
-	printw("\nRemaining space in buffer: %dB", (BUFSIZE-index));
+	bold_print("\n\n === Status ==");
+	printw("\n\n Current index: %d", index);
+	printw("\n State: %s", word_status ? "IN word" : "OUT of word");
+	printw("\n Hidden characters: %s", hidden ? "enabled" : "disabled");
+	printw("\n Word count: %d", wc);
+	printw("\n Buffer size: %dB", BUFSIZE-1);
+	printw("\n Remaining space in buffer: %dB", (BUFSIZE-index-1));
+
 
 	/* Handle invisible characters. */
 	switch(last_char)
 	{
 		case '\n':
-			printw("\nLast character in buffer: \\n (%d)", last_char);
+			printw("\n Last character in buffer: \\n (%d)", last_char);
 			break;
 		case '\t':
-			printw("\nLast character in buffer: \\t (%d)", last_char);
+			printw("\n Last character in buffer: \\t (%d)", last_char);
 			break;
 		case ' ':
-			printw("\nLast character in buffer: \\spc (%d)", last_char);
+			printw("\n Last character in buffer: \\spc (%d)", last_char);
 			break;
 		default:
-			printw("\nLast character in buffer: %c (%d)", last_char, last_char);
+			printw("\n Last character in buffer: %c (%d)", last_char, last_char);
 			break;
 	}
 
+	if (index == (BUFSIZE-1))
+	{
+		attron(COLOR_PAIR(1));
+		attron(A_BOLD);
+		printw("\n\n Buffer full! Delete characters with backspace, or clear the buffer with Ctrl-L");
+		attroff(COLOR_PAIR(1));
+		attroff(A_BOLD);
+	}
+
 	/* Handle `hidden` state. */
-	bold_print("\n\n=== Submitted text ===\n\n");
+	bold_print("\n\n === Buffer State ===\n\n");
 	if (hidden)
 		print_hidden(buf);
 	else
-		printw("%s", buf);
+		printw(" %s", buf);
 
 	return 0;
 }
@@ -212,6 +233,7 @@ print_hidden(char buf[])
 {
 	int i = 0;
 
+	printw(" ");
 	while (buf[i] != 0)
 	{
 		switch (buf[i])
@@ -232,4 +254,12 @@ print_hidden(char buf[])
 		++i;
 	}
 	return 0;
+}
+
+int
+is_cntrl(char c)
+{
+	if (c == CTRL('h') || c == CTRL('l'))
+		return TRUE;
+	else return FALSE;
 }
