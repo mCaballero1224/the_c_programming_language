@@ -24,7 +24,7 @@ int bold_print(char *buf);
 
 /* TODO: Prints the buffer, replacing tabs, newlines
 	and spaces with visible characters */
-int print_hidden(char *buf);
+int print_hidden(char buf[]);
 
 
 /* count lines, words, and characters in input */
@@ -145,8 +145,11 @@ print_status(char *buf, int wc, int index, int hidden)
 			break;
 	}
 
-	printw("\nSubmitted text:");
-	printw("\n%s", buf);
+	printw("\nSubmitted text:\n");
+	if (hidden)
+		print_hidden(buf);
+	else
+		printw("%s", buf);
 
 	return 0;
 }
@@ -169,7 +172,28 @@ bold_print(char *buf)
 }
 
 int
-print_hidden(char *buf)
+print_hidden(char buf[])
 {
+	int i = 0;
+
+	while (buf[i] != 0)
+	{
+		switch (buf[i])
+		{
+			case ' ':
+				bold_print("\\spc");
+				break;
+			case '\t':
+				bold_print("\\t");
+				break;
+			case '\n':
+				bold_print("\n\\n");
+				break;
+			default:
+				printw("%c", buf[i]);
+				break;
+		}
+		++i;
+	}
 	return 0;
 }
