@@ -39,7 +39,7 @@
     <li>The final result feels like a <em>really</em> basic text-editor.</li>
 </ul>
 
-1-12. [ ] Write a program that prints one word per line.
+1-12. [x] Write a program that prints one word per line.
 
 1-13. [ ] Write a program to print a histogram of the lengths of words in its input. 
 
