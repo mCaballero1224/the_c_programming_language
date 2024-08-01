@@ -41,7 +41,7 @@
 
 1-12. [x] Write a program that prints one word per line.
 
-1-13. [ ] Write a program to print a histogram of the lengths of words in its input. 
+1-13. [x] Write a program to print a histogram of the lengths of words in its input. 
 
 1-14. [ ] Write a program to print a histogram of the frequences of different characters in its input. 
 

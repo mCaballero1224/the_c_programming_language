@@ -20,8 +20,7 @@ int
 main(int argc, char **argv)
 {
 	int ch, in_word, length, vertical;
-
-	int hist[MAX_LEN] = {0};
+int hist[MAX_LEN] = {0};
 	in_word = length = 0;
 
 
@@ -105,10 +104,7 @@ print_histogram(int hist[])
 
 	while (i < MAX_LEN)
 	{
-		printw("\n ");
-		if (i < 9)
-			printw(" ");
-		printw("%d: ", i+1);
+		printw("\n%2d: ", i+1);
 		for (int j = 0; j < hist[i]; j++)
 			printw("*");
 		++i;
