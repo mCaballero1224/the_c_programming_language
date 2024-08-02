@@ -43,14 +43,16 @@
 
 1-13. [x] Write a program to print a histogram of the lengths of words in its input. 
 
-1-14. [ ] Write a program to print a histogram of the frequences of different characters in its input. 
+1-14. [x] Write a program to print a histogram of the frequences of different characters in its input. 
 
 ## Programs
 - [`fahr2celsius`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/fahr2celsius): prints a Fahrenheit-Celsius table using a lower limit, upper limit, and step value to increment between the two limits.
 - [`celsius2fahr`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/celsius2fahr): prints a Celsius-Fahrenheit table using a similar method as `fahr2celsius`.
+- [`charhist`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/charhist): creates a histogram of characters based on user input. 
 - [`copycat`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/copycat): copies keyboard input to stdout, replacing tabs, backspaces, and backslashes with characters.
 - [`eofval`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/eofval): small program that evaluates keyboard input comparing it against the value for end-of-file (EOF).
 - [`hello-world`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/hello-world): prints a "hello, world" message to the terminal.
 - [`specialcount`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/specialcount): copies keyboard input to stdout, counting total characters read, newlines, tabs, and spaces/blanks.
 - [`wordcount`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordcount): copies keyboard input to stdout, counting words entered.
+- [`wordhist`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordhist): creates a histogram of wordlengths based on user input. 
 - [`wordline`](https://github.com/mCaballero1224/the_c_programming_language/tree/main/chapter1/wordline): copies keyboard input to stdout, printing each word on a new line.
