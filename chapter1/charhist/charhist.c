@@ -1,45 +1,31 @@
-#include <ncurses.h>
+#include <stdio.h>      /* printf   */
 
-#define TRUE 1
-#define FALSE 0
-#define CHARS 97 /* number of supported characters */
-#define CTRL(x) ((x) & 0x1f)
-
-int end_program(int hist[]);
+#define CHARS 94
 
 int print_histogram(int hist[]);
 
-int print_warning(char *message);
+int end_program();
 
-int 
-main()
+int
+main(void)
 {
-	initscr();
-	raw();
-	keypad(stdscr, TRUE);
-	noecho();
-	
-	printw("\n Welcome to Charhist!");
-	printw("\n Enter text via the keyboard.");
-	printw("\n Press Ctrl-D to show the histogram of characters entered.");
-	print_warning("Characters cannot be deleted with backspace.");
-	printw("\n\n");
 	int ch;
-
-	/* Idexes:
-		* 0: tab ('\t')
-		* 1: newline ('\n')
-		* 2: space (' ')
-		* 3 - 94: all other ascii characters excluding DEL
-	*/
 	int hist[CHARS] = {0};
 
-	while ((ch = getch()) != ERR)
+	printf("\nWelcome to Charhist!");
+	printf("\nEnter text via the keyboard.");
+	printf("\nPress CTRL-D to see the histogram of characters given.\n\n");
+
+	while ((ch = getchar()) != EOF)
 	{
+		/* Indexes
+		* 0 = tab
+		* 1 = newline
+		* 2 = space
+		* 3+ = printable characters
+		*/
 		switch(ch)
 		{
-			case CTRL('d'):
-				return end_program(hist);
 			case '\t':
 				++hist[0];
 				break;
@@ -51,65 +37,47 @@ main()
 				break;
 			default: 
 				++hist[ch-33];
-				break;
 		}
-		printw("%c", ch);
-		refresh();
 	}
-}
-
-int 
-print_histogram(int hist[])
-{
-	clear();
-	int i = 0;
-	printw("\n == Resultss ==");
-
-
-	while ( i < CHARS)
-	{
-		switch(i)
-		{
-			case 0:
-				printw("\n%7s: ", "TAB");
-				break;
-			case 1: 
-				printw("\n%7s: ", "NEWLINE");
-				break;
-			case 2: 
-				printw("\n%7s: ", "SPACE");
-				break;
-			default:
-				printw("\n%7c: ", i+33);
-		}
-		printw("%d", hist[i]);
-		++i;
-	}
-	printw("\n");
-	return 0;
-}
-
-int 
-end_program(int hist[])
-{
-	clear();
-	printw("\n === Results ===");
 	print_histogram(hist);
-	printw("\n Thank you for using Charhist!");
-	printw("\n Press any key to exit.");
-	getch();
-	endwin();
+	end_program();
 	return 0;
 }
 
 int
-print_warning(char *message)
+print_histogram(int hist[])
 {
-	init_pair(0, COLOR_BLACK, COLOR_RED);
-	attron(0);
-	attron(A_BOLD);
-	printw("\n WARNING: %s", message);
-	attroff(A_BOLD);
-	attroff(0);
+	printf("\nResults:\n");
+	
+	int i = 0;
+	while (i < CHARS)
+	{
+		switch(i)
+		{
+			case 0:
+				printf("\n%6s: ", "\\t");
+				break;
+			case 1:
+				printf("\n%6s: ", "\\n");
+				break;
+			case 2:
+				printf("\n%6s: ", "\\spc");
+				break;
+			default:
+				printf("\n%6c: ", i+33);
+		}
+		for (int j = 0; j < hist[i]; ++j)
+		{
+			printf("*");
+		}
+		++i;
+	}
+	return 0;
+}
+
+int
+end_program()
+{
+	printf("\nThank you for using charhist!\n");
 	return 0;
 }
